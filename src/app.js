@@ -293,7 +293,7 @@ class App{
                 }</li>`);
                 li.appendTo('#lifeTrajectory');
                 $("#lifeTrajectory").scrollTop($("#lifeTrajectory")[0].scrollHeight);
-                if(isEnd&&age>=400) {
+                if(isEnd&&age>=500) {
                     this.#isEnd = true;
                     trajectoryPage.find('#summary').show();
                 }
