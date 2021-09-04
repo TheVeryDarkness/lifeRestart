@@ -60,7 +60,7 @@ class App{
 
         indexPage
             .find('#rank')
-            .click(()=>this.hint('别卷了！没有排行榜'));
+            .click(()=>this.hint('别卷了！凡人'));
 
         indexPage
             .find("#themeToggleBtn")
@@ -74,11 +74,14 @@ class App{
                 this.setTheme(localStorage.getItem('theme'))
             });
 
+        const talentCount = 80;
+        const chosenTalentCount = 20;
+        const basicPropertyMax = 40;
         // Talent
         const talentPage = $(`
         <div id="main">
             <div class="head" style="font-size: 1.6rem">天赋抽卡</div>
-            <button id="random" class="mainbtn" style="top: 50%;">10连抽！</button>
+            <button id="random" class="mainbtn" style="top: 50%;">`+talentCount+`连抽！</button>
             <ul id="talents" class="selectlist"></ul>
             <button id="next" class="mainbtn" style="top:auto; bottom:0.1em">请选择3个</button>
         </div>
@@ -87,6 +90,7 @@ class App{
         const createTalent = ({ grade, name, description }) => {
             return $(`<li class="grade${grade}b">${name}（${description}）</li>`)
         };
+
 
         talentPage
             .find('#random')
@@ -102,8 +106,8 @@ class App{
                                 li.removeClass('selected')
                                 this.#talentSelected.delete(talent);
                             } else {
-                                if(this.#talentSelected.size==3) {
-                                    this.hint('只能选3个天赋');
+                                if(false&&this.#talentSelected.size==chosenTalentCount) {
+                                    this.hint('只能选'+chosenTalentCount+'个天赋');
                                     return;
                                 }
 
@@ -130,11 +134,11 @@ class App{
         talentPage
             .find('#next')
             .click(()=>{
-                if(this.#talentSelected.size!=3) {
-                    this.hint('请选择3个天赋');
+                if(this.#talentSelected.size<chosenTalentCount) {
+                    this.hint('请选择不少于'+chosenTalentCount+'个天赋');
                     return;
                 }
-                this.#totalMax = 20 + this.#life.getTalentAllocationAddition(Array.from(this.#talentSelected).map(({id})=>id));
+                this.#totalMax = basicPropertyMax + this.#life.getTalentAllocationAddition(Array.from(this.#talentSelected).map(({id})=>id));
                 this.switch('property');
             })
 
@@ -171,6 +175,7 @@ class App{
             group.append(btnAdd);
 
             const limit = v=>{
+                return v;
                 v = Number(v)||0;
                 v = Math.round(v);
                 return v < min ? min : (
@@ -327,7 +332,7 @@ class App{
                 this.#life.talentExtend(this.#selectedExtendTalent);
                 this.#selectedExtendTalent = null;
                 this.#talentSelected.clear();
-                this.#totalMax = 20;
+                this.#totalMax = basicPropertyMax;
                 this.#isEnd = false;
                 this.switch('index');
             });
@@ -365,7 +370,7 @@ class App{
                 clear: ()=>{
                     talentPage.find('ul.selectlist').empty();
                     talentPage.find('#random').show();
-                    this.#totalMax = 20;
+                    this.#totalMax = basicPropertyMax;
                 },
             },
             property: {

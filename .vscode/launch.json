@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch",
+            "url": "http://localhost/view/index.html"
+        },
+       /* {
             "type": "node",
             "request": "launch",
             "name": "test",
@@ -12,13 +18,15 @@
             "skipFiles": [
                 "<node_internals>/**"
             ]
-        },
+        },*/
         {
             "type": "node",
             "request": "launch",
             "name": "xlsxTransform",
             "program": "${workspaceFolder}/utils/xlsxTransform.js",
-            "args": ["data"],
+            "args": [
+                "data"
+            ],
             "skipFiles": [
                 "<node_internals>/**"
             ]
