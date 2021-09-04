@@ -94,14 +94,14 @@ function checkProp(property, condition) {
             if(Array.isArray(propData))
                 return !propData.includes(conditionData);
             return propData == conditionData;
-        case '?':
+        case '?': // any
             if(Array.isArray(propData)) {
                 for(const p of propData)
                     if(conditionData.includes(p)) return true;
                 return false;
             }
             return conditionData.includes(propData);
-        case '!':
+        case '!': // none
             if(Array.isArray(propData)) {
                 for(const p of propData)
                     if(conditionData.includes(p)) return false;

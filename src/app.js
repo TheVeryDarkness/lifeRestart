@@ -75,7 +75,7 @@ class App{
             });
 
         const talentCount = 80;
-        const chosenTalentCount = 20;
+        const chosenTalentCount = 3;
         const basicPropertyMax = 40;
         // Talent
         const talentPage = $(`
@@ -293,7 +293,7 @@ class App{
                 }</li>`);
                 li.appendTo('#lifeTrajectory');
                 $("#lifeTrajectory").scrollTop($("#lifeTrajectory")[0].scrollHeight);
-                if(isEnd) {
+                if(isEnd&&age>=400) {
                     this.#isEnd = true;
                     trajectoryPage.find('#summary').show();
                 }

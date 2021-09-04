@@ -89,11 +89,11 @@ class Life {
 
         let totalWeights = 0;
         for(const [, weight] of events)
-            totalWeights += weight;
+            totalWeights += 1;
 
         let random = Math.random() * totalWeights;
         for(const [eventId, weight] of events)
-            if((random-=weight)<0)
+            if((random-=1)<0)
                 return eventId;
         return events[events.length-1];
     }
